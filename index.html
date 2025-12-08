@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evita Estafas · 100% Dominicana™</title>
+
+  <!-- Progressive web app meta -->
+  <meta name="theme-color" content="#0f1724" />
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    /* ---- Reset y variables ---- */
+    :root{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --text: #0b1220;
+      --accent: #06b6d4;
+      --danger: #ef4444;
+      --ok: #10b981;
+      --glass: rgba(255,255,255,0.06);
+    }
+    body.dark {
+      --bg: #071023;
+      --card: #071728;
+      --muted: #9aa7b3;
+      --text: #e6f0f6;
+      --accent: #00ffc3;
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(6,182,212,0.06), transparent),
+                  linear-gradient(180deg,var(--bg), #081026);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:background .25s, color .25s;
+      padding:20px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .app {
+      width:100%;
+      max-width:1000px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:18px;
+      align-items:start;
+    }
+
+    header.app-header{
+      grid-column:1 / -1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:4px;
+    }
+
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo {
+      width:56px;height:56px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent), #6ee7b7);
+      color:#001;
+      font-weight:800;
+      box-shadow:0 6px 18px rgba(2,6,23,0.25);
+    }
+    h1{font-size:18px;margin:0}
+    p.lead{margin:0;font-size:13px;color:var(--muted)}
+
+    .controls {display:flex;gap:8px;align-items:center}
+
+    .btn {
+      background:var(--accent);
+      border:none;padding:8px 12px;border-radius:10px;color:#001;font-weight:700;
+      box-shadow:0 6px 14px rgba(6,182,212,0.08);
+    }
+    .btn.ghost {background:transparent;border:1px solid rgba(255,255,255,0.06); color:var(--text);font-weight:600}
+    .btn.warn {background:var(--danger); color:white}
+
+    main.panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:14px;padding:18px; min-height:360px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.35);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .card {
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      margin-bottom:12px;
+      color:var(--text);
+      box-shadow:0 6px 18px rgba(2,6,23,0.06);
+    }
+
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    input[type="text"]{
+      width:100%;padding:10px;border-radius:10px;border:1px solid #e6e9ef;
+      outline:none;font-size:14px;
+    }
+    input[type="text"]:focus{box-shadow:0 6px 18px rgba(2,6,23,0.06);}
+
+    .resultado {margin-top:10px;padding:12px;border-radius:8px;font-weight:700}
+    .resultado.warn {background:var(--danger); color:white}
+    .resultado.ok {background:var(--ok); color:white}
+    .muted-block{font-size:13px;color:var(--muted);margin-top:8px}
+
+    /* sidebar */
+    aside.sidebar {
+      position:sticky; top:20px;
+      align-self:start;
+      display:flex;flex-direction:column;gap:12px;
+    }
+    .sidebar .card {padding:12px}
+    .history-list {max-height:360px; overflow:auto;padding:6px;display:flex;flex-direction:column;gap:8px}
+    .hist-item {display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px;border-radius:8px;background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent)}
+    .hist-item small{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .meta {font-size:12px;color:var(--muted)}
+
+    .footer-note{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;}
+
+    /* responsive */
+    @media (max-width:940px){
+      .app{grid-template-columns: 1fr; padding-bottom:40px}
+      aside.sidebar{position:relative; top:auto}
+    }
+    /* tiny touches */
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass);color:var(--muted);display:inline-block}
+    .dom-badge{font-size:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#ffcc00,#ff8a00);color:#111;font-weight:800}
+    a.linkish{color:var(--accent);text-decoration:none;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo">ED</div>
+        <div>
+          <h1>Evita Estafas · 100% Dominicana™</h1>
+          <p class="lead">Herramienta educativa — verificador local, historial y modo instalable</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn ghost" id="installBtn" style="display:none">Instalar</button>
+        <button class="btn" id="toggleTheme">🌗 Modo</button>
+      </div>
+    </header>
+
+    <main class="panel">
+      <div class="card">
+        <h2>Verificador de enlaces (local)</h2>
+        <p class="muted-block">Pega un enlace y pulsa <strong>Verificar</strong>. Esta herramienta evalúa patrones, no consulta bases externas.</p>
+
+        <label for="link">Enlace a verificar</label>
+        <input type="text" id="link" placeholder="https://ejemplo.com/oferta" autocomplete="off"/>
+
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn" id="checkBtn">Verificar link</button>
+          <button class="btn ghost" id="clearBtn">Limpiar</button>
+        </div>
+
+        <div id="resultadoArea"></div>
+
+        <div class="muted-block">
+          <strong>Nota visible:</strong>
+          <div style="margin-top:6px;padding:10px;border-radius:8px;background:var(--glass);">
+            <strong>Esta función no es 100% segura.</strong>
+            <ul style="margin:8px 0 0 18px;color:var(--muted)">
+              <li>Analiza patrones simples (dominio, acortadores, palabras cebos).</li>
+              <li>No consulta bases de datos externas en esta versión (no hay servidor).</li>
+              <li>Un sitio falso bien hecho puede parecer legítimo ante estas reglas.</li>
+              <li>Para verificación avanzada se requieren APIs como VirusTotal o Google Safe Browsing.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Funciones incluidas</h3>
+        <ul style="margin:8px 0 0 18px;color:var(--muted)">
+          <li>Modo claro/oscuro</li>
+          <li>Verificación local y explicación de motivos</li>
+          <li>Historial guardado en tu dispositivo (localStorage)</li>
+          <li>Instalable (PWA) y funciona offline gracias al service worker</li>
+          <li>Visibilidad transparente: no se envía nada fuera</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Por qué no es perfecto (explicación breve)</h3>
+        <p class="muted-block">
+          El verificador local usa heurísticas. Los estafadores profesionales compran dominios creíbles, usan subdominios reales, certificados SSL válidos y páginas clonadas. Solo una verificación con bases externas y análisis de comportamiento (y/o intervención humana) puede ofrecer mayor seguridad.
+        </p>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Historial</strong>
+          <span class="tag" id="countTag">0</span>
+        </div>
+
+        <div class="history-list" id="history"></div>
+
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn ghost" id="exportBtn">Exportar (JSON)</button>
+          <button class="btn warn" id="clearHistoryBtn">Borrar todo</button>
+        </div>
+
+        <div class="footer-note">
+          <div class="dom-badge">100% Dominicana™</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Consejos rápidos</h4>
+        <ul style="margin:8px 0 0 18px;color:var(--muted)">
+          <li>No abras enlaces acortados sin ver la URL real</li>
+          <li>Activa 2FA en tus cuentas</li>
+          <li>No compartas códigos ni contraseñas</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // ---- Theme ----
+    const body = document.body;
+    const toggle = document.getElementById('toggleTheme');
+    const installBtn = document.getElementById('installBtn');
+
+    function setTheme(dark){
+      if(dark) body.classList.add('dark');
+      else body.classList.remove('dark');
+      localStorage.setItem('themeDark', dark ? '1' : '0');
+    }
+    toggle.addEventListener('click', () => {
+      setTheme(!body.classList.contains('dark'));
+    });
+    // init
+    setTheme(localStorage.getItem('themeDark') === '1');
+
+    // ---- PWA install prompt handling ----
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      if (choice.outcome === 'accepted') {
+        installBtn.style.display = 'none';
+      }
+      deferredPrompt = null;
+    });
+
+    // ---- Service worker registration ----
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(err => {
+        console.log('sw register error', err);
+      });
+    }
+
+    // ---- Link verification logic & history ----
+    const checkBtn = document.getElementById('checkBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const linkInput = document.getElementById('link');
+    const resultadoArea = document.getElementById('resultadoArea');
+
+    const historyEl = document.getElementById('history');
+    const countTag = document.getElementById('countTag');
+    const exportBtn = document.getElementById('exportBtn');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+    function saveToHistory(entry){
+      const hist = JSON.parse(localStorage.getItem('ed_history')||'[]');
+      hist.unshift(entry); // newest first
+      // limit history to 200 items
+      if(hist.length>200) hist.length = 200;
+      localStorage.setItem('ed_history', JSON.stringify(hist));
+      renderHistory();
+    }
+
+    function renderHistory(){
+      const hist = JSON.parse(localStorage.getItem('ed_history')||'[]');
+      historyEl.innerHTML = '';
+      countTag.textContent = hist.length;
+      hist.forEach((h, idx) => {
+        const div = document.createElement('div');
+        div.className = 'hist-item';
+        const left = document.createElement('div');
+        left.style.flex='1';
+        const a = document.createElement('a');
+        a.href = h.url;
+        a.target = '_blank';
+        a.textContent = h.url;
+        a.className = 'linkish';
+        left.appendChild(a);
+        const small = document.createElement('small');
+        small.textContent = new Date(h.time).toLocaleString();
+        left.appendChild(document.createElement('br'));
+        left.appendChild(small);
+
+        const right = document.createElement('div');
+        right.style.textAlign='right';
+        const tag = document.createElement('div');
+        tag.className = 'meta';
+        tag.textContent = h.resultText;
+        right.appendChild(tag);
+        const btnRow = document.createElement('div');
+        btnRow.style.marginTop='6px';
+        const rep = document.createElement('button');
+        rep.className='btn ghost';
+        rep.textContent='Revisar';
+        rep.onclick = ()=>{ linkInput.value = h.url; verifyLink(h.url); window.scrollTo({top:0,behavior:'smooth'}) };
+        const del = document.createElement('button');
+        del.className='btn warn';
+        del.textContent='X';
+        del.style.marginLeft='6px';
+        del.onclick = ()=>{
+          const arr = JSON.parse(localStorage.getItem('ed_history')||'[]');
+          arr.splice(hist.length - idx - 1, 1); // careful index because we unshifted
+          localStorage.setItem('ed_history', JSON.stringify(arr));
+          renderHistory();
+        };
+        btnRow.appendChild(rep); btnRow.appendChild(del);
+        right.appendChild(btnRow);
+
+        div.appendChild(left); div.appendChild(right);
+        historyEl.appendChild(div);
+      });
+    }
+
+    function commonSuspiciousPatterns(u){
+      const s = u.toLowerCase();
+      const suspects = [
+        'bit.ly','tinyurl','t.co','goo.gl','tiny.cc','ow.ly',
+        '.xyz','.top','.club','.win','.info',
+        'gratis','premio','ganaste','bono','gift','oferta'
+      ];
+      for(const p of suspects) if(s.includes(p)) return p;
+      return null;
+    }
+
+    function domainLooksWeird(u){
+      try {
+        const url = new URL(u);
+        const host = url.hostname;
+        // subdomain heavy: many dots and long host
+        if(host.split('.').length > 3) return true;
+        // very long host
+        if(host.length > 30) return true;
+        return false;
+      } catch(e){
+        return false;
+      }
+    }
+
+    function verifyLinkFromInput(){
+      const v = linkInput.value.trim();
+      if(!v){ resultadoArea.innerHTML = '<div class="resultado warn">Introduce un enlace.</div>'; return; }
+      verifyLink(v);
+    }
+
+    function verifyLink(url){
+      // normalize
+      let u = url.trim();
+      if(!/^https?:\/\//i.test(u)) u = 'http://' + u;
+
+      const suspect = commonSuspiciousPatterns(u);
+      const weirdDomain = domainLooksWeird(u);
+
+      let resultText = 'Desconocido';
+      let cls = 'warn';
+      if(suspect){
+        resultText = 'Posible estafa (patrón: "'+suspect+'")';
+        cls = 'warn';
+      } else if(weirdDomain){
+        resultText = 'Posible estafa (dominio inusual)';
+        cls = 'warn';
+      } else {
+        try{
+          const parsed = new URL(u);
+          if(parsed.protocol === 'https:') {
+            resultText = 'Parece normal (https). Revisa siempre antes de confiar.';
+            cls = 'ok';
+          } else {
+            resultText = 'Enlace sin HTTPS — revisar con cuidado.';
+            cls = 'warn';
+          }
+        }catch(e){
+          resultText = 'Enlace inválido.';
+          cls = 'warn';
+        }
+      }
+
+      resultadoArea.innerHTML = `<div class="resultado ${cls}">${resultText}</div>
+        <div class="muted-block">Motivos: ${suspect ? 'Patrón sospechoso detectado ('+suspect+')' : weirdDomain ? 'Dominio con estructura inusual' : 'El enlace usa HTTPS (mejor), pero no garantiza legitimidad.'}</div>`;
+
+      // save to history
+      const entry = { url: u, resultText, time: Date.now() };
+      saveToHistory(entry);
+    }
+
+    checkBtn.addEventListener('click', verifyLinkFromInput);
+    linkInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') verifyLinkFromInput(); });
+    clearBtn.addEventListener('click', ()=>{ linkInput.value=''; resultadoArea.innerHTML=''; });
+
+    exportBtn.addEventListener('click', ()=>{
+      const data = localStorage.getItem('ed_history') || '[]';
+      const blob = new Blob([data], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'evita_estafas_history.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    clearHistoryBtn.addEventListener('click', ()=>{
+      if(confirm('Borrar todo el historial?')) {
+        localStorage.removeItem('ed_history');
+        renderHistory();
+      }
+    });
+
+    // init history render
+    renderHistory();
+  </script>
+</body>
+</html>
