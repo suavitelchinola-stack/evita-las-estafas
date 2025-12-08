@@ -1,0 +1,54 @@
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #222;
+    --header-color: #0099ff;
+    --btn-color: #0099ff;
+}
+
+body.dark {
+    --bg-color: #1e1e1e;
+    --text-color: #f4f4f4;
+    --header-color: #00ccff;
+    --btn-color: #00ccff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--header-color);
+    padding: 1rem;
+    text-align: center;
+    color: white;
+}
+
+button {
+    background-color: var(--btn-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+main {
+    padding: 1rem;
+}
+
+.verificador input {
+    width: 70%;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.versionAntigua a {
+    color: var(--btn-color);
+    text-decoration: none;
+    font-weight: bold;
+}
