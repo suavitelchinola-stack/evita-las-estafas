@@ -1,48 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <title>Evita las Estafas | 100% Dominicana™</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verificador de Links - 100% Dominicana™</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🔒 Verificador de Links</h1>
-    <button id="themeToggle">🌙 / ☀️</button>
-  </header>
 
-  <main>
-    <section class="verificador">
-      <input type="text" id="linkInput" placeholder="Pega aquí el link">
-      <button id="checkBtn">Verificar</button>
-      <p id="result">Resultado aparecerá aquí</p>
-    </section>
+<header>
+  <h1>🛡️ Evita las Estafas</h1>
+  <p>Analiza enlaces y detecta señales de riesgo</p>
+</header>
 
-    <section class="historial">
-      <h2>Historial de Links</h2>
-      <ul id="historyList"></ul>
-    </section>
+<main>
 
-    <section class="educativo">
-      <h2>📚 Sobre las estafas</h2>
-      <p>
-        En 2025, las estafas digitales son cada vez más sofisticadas. 
-        Evítalas verificando links, no compartiendo datos sensibles y revisando remitentes. 
-        Esta herramienta ayuda, pero <strong>no es 100% segura</strong>.
-      </p>
-    </section>
+  <section class="card">
+    <h2>🔎 Analizar un link</h2>
+    <input id="linkInput" type="text" placeholder="https://ejemplo.com">
+    <button id="checkBtn">Analizar enlace</button>
 
-    <section class="versionAntigua">
-      <a href="index_backup.html">Ver versión antigua</a>
-    </section>
-  </main>
+    <div id="resultBox" class="result hidden">
+      <span id="riskTag"></span>
+      <p id="resultText"></p>
+      <small>⚠️ Este análisis es educativo y no garantiza seguridad total.</small>
+    </div>
+  </section>
 
-  <footer>
-    <p>100% Dominicana™</p>
-  </footer>
+  <section class="card">
+    <h2>🧠 ¿Cómo operan las estafas?</h2>
+    <p>
+      Las estafas digitales usan urgencia, premios falsos y páginas clonadas
+      para engañar. Muchas lucen reales, pero esconden detalles sospechosos.
+    </p>
+    <ul>
+      <li>URLs con símbolos raros o palabras engañosas</li>
+      <li>Empresas famosas con dominios falsos</li>
+      <li>Mensajes que presionan a actuar rápido</li>
+    </ul>
+  </section>
 
-  <script src="script.js"></script>
+  <section class="card">
+    <h2>📜 Historial reciente</h2>
+    <ul id="historyList"></ul>
+  </section>
+
+</main>
+
+<footer>
+  <p>Proyecto educativo · 100% Dominicana™ 🇩🇴</p>
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
