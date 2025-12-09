@@ -1,54 +1,115 @@
 :root {
-    --bg-color: #f4f4f4;
-    --text-color: #222;
-    --header-color: #0099ff;
-    --btn-color: #0099ff;
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #00ccff;
+  --btn-bg: #1f1f1f;
+  --btn-hover: #00ccff;
 }
 
-body.dark {
-    --bg-color: #1e1e1e;
-    --text-color: #f4f4f4;
-    --header-color: #00ccff;
-    --btn-color: #00ccff;
+body.light {
+  --bg-color: #f4f4f4;
+  --text-color: #222;
+  --accent-color: #0099ff;
+  --btn-bg: #e0e0e0;
+  --btn-hover: #0099ff;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s, color 0.3s;
 }
 
 header {
-    background-color: var(--header-color);
-    padding: 1rem;
-    text-align: center;
-    color: white;
+  background-color: var(--accent-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+header h1 {
+  font-size: 1.5rem;
 }
 
 button {
-    background-color: var(--btn-color);
-    border: none;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+  color: #fff;
 }
 
 main {
-    padding: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: auto;
 }
 
 .verificador input {
-    width: 70%;
-    padding: 0.5rem;
-    margin-right: 0.5rem;
+  width: 70%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+}
+
+.verificador button {
+  margin-left: 0.5rem;
+}
+
+.historial ul {
+  list-style-type: none;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.historial li {
+  background-color: #1f1f1f;
+  padding: 0.5rem;
+  margin-bottom: 0.3rem;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.historial li:hover {
+  background-color: var(--accent-color);
+  color: #000;
+}
+
+.educativo p {
+  background-color: #1f1f1f;
+  padding: 1rem;
+  border-radius: 8px;
+  line-height: 1.5;
 }
 
 .versionAntigua a {
-    color: var(--btn-color);
-    text-decoration: none;
-    font-weight: bold;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #222;
+  margin-top: 2rem;
 }
